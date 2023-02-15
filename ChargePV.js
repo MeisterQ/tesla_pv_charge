@@ -15,7 +15,7 @@ const chargeIncFactor = 1                   // Increasing amps.
 const chargeDecFactor = 1                   // Decreasing amps. 
 const maxAmpManual = 16                     // Max amps for non-auto mode
 const pollTime = 10                         // Data refresh time in seconds
-const VIN = 'LRW3E7FS3PC743628'             // Your VIN
+const VIN = ''             					// Your VIN
 const adapterInstance = 'tesla-motors.0'    // Adapter instance
 
 
