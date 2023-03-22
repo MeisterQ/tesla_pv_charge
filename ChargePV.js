@@ -95,7 +95,7 @@ function getData() {
     PVEnergy = getState(idPVEnergy).val;
     GridEnergy = getState(idGridEnergy).val;
     ChargeAllPV = getState(idChargeAllPV).val;
-    PVSOC = 10; // getState(idPVSOC).val;
+    PVSOC = getState(idPVSOC).val;
     ActualCurrent = getState(idActualCurrent).val;
     ActualSetAmps = getState(idChargeAmps).val;
 }
