@@ -13,6 +13,20 @@ One example how the script works.
 
 From 10am it startet charging only from the pv.
 
+
+
 The yellow graph is PV energy, the purple graph is the charging power.
 
 ![PV charge](PVCharge.png)
+
+
+Adjust the constants in script according to the comments.
+![Constants](constants.png)
+
+
+Then enter your custom datapoints for energy and to enable the pv charging
+![Variables](variables.png)
+
+Here are some examples for this datapoints
+![dp1](dp1.png)
+![dp2](dp2.png)
