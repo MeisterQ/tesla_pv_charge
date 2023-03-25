@@ -13,4 +13,6 @@ One example how the script works.
 
 From 10am it startet charging only from the pv.
 
+The yellow graph is PV energy, the purple graph is the charging power.
+
 ![PV charge](PVCharge.png)
