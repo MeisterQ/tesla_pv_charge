@@ -12,4 +12,5 @@ I will keep improving it in the future.
 One example how the script works.
 
 From 10am it startet charging only from the pv.
-![PV charge](/assets/images/PVCharge.png)
+
+![PV charge](PVCharge.png)
