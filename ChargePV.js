@@ -95,7 +95,7 @@ function getData() {
     PVEnergy = getState(idPVEnergy).val;
     GridEnergy = getState(idGridEnergy).val;
     ChargeAllPV = getState(idChargeAllPV).val;
-    PVSOC = getState(idPVSOC).val;
+    PVSOC = 100; // getState(idPVSOC).val;
     ActualCurrent = getState(idActualCurrent).val;
     ActualSetAmps = getState(idChargeAmps).val;
 }
@@ -123,14 +123,16 @@ function batteryCheck() {
     if (PVBatteryIsPresent) {
         if (PVSOC > PVBatterySOC) {
             PVBatteryCheck = true;
+            log("Battery OK")
         }
         if (PVSOC < PVBatterySOC) {
             PVBatteryCheck = false;
+            log("Battery not OK")
         }
     }
     if (!PVBatteryIsPresent) {
         PVBatteryCheck = true;
-
+        log("No battery")
     }
 }
 
@@ -170,17 +172,22 @@ function calcAmps() {
         ChargeStop = false;
         ChargeStart = true;
     }
+    //log(ChargeAmps.toString());
 }
 
 // FUNCTION: Charge helper
 function isCharging() {
-    if (ChargeStart) {
+    if ((ChargeStart) && (!ChargeIsStarted)) {
         setState(idChargeStart, true);
+        ChargeIsStopped = false;
+        ChargeIsStarted = true;
         log("Charge start");
     }
 
-    if (ChargeStop) {
+    if ((ChargeStop) && (!ChargeIsStopped)) {
         setState(idChargeStop, true);
+        ChargeIsStarted = false;
+        ChargeIsStopped = true;
         log("Charge stop");
     }
 }
@@ -192,8 +199,12 @@ function createStates() {
 
 // FUNCTION: Send charging data
 function sendAmpsToCar() {
-    setState(idChargeAmps, ChargeAmps);
-    log(ChargeAmps.toString());
+    if (ChargeAmps != LastChargeAmps) {
+        setState(idChargeAmps, ChargeAmps);
+        log(ChargeAmps.toString());
+        LastChargeAmps = ChargeAmps;
+    }
+
 }
 
 // Get data 
