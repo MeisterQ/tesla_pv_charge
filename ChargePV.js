@@ -38,6 +38,7 @@ const maxAmpManual = 16                     // Max amps for non-auto mode
 const pollTime = 5                          // Data refresh time in seconds
 const VIN = ''             // Your VIN
 const adapterInstance = 0                   // Adapter instance number
+const ChargeStopDelayTime = 10;             // Delay to stop charging. Usefull to increase time during a cloudy day
 
 
 // IDs of necessary datapoints
@@ -84,6 +85,9 @@ var ChargePortDoorOpen = false;
 var ActualCurrent = 0;
 var DebugMessage;
 var ActualSetAmps = 0;
+
+
+var meinTimeout;
 
 // FUNCTION: Poll data
 function getData() {
@@ -181,13 +185,17 @@ function isCharging() {
         setState(idChargeStart, true);
         ChargeIsStopped = false;
         ChargeIsStarted = true;
+        clearTimeout(meinTimeout);
         log("Charge start");
     }
 
     if ((ChargeStop) && (!ChargeIsStopped)) {
-        setState(idChargeStop, true);
-        ChargeIsStarted = false;
-        ChargeIsStopped = true;
+        meinTimeout = setTimeout(function () {
+            setState(idChargeStop, true);
+            ChargeIsStarted = false;
+            ChargeIsStopped = true;
+        }, (ChargeStopDelayTime * 1000));
+
         log("Charge stop");
     }
 }
